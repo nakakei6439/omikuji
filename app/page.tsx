@@ -3,8 +3,18 @@
 import { useState } from 'react';
 
 const zodiacSigns = [
-  'おひつじ座', 'おうし座', 'ふたご座', 'かに座', 'しし座', 'おとめ座',
-  'てんびん座', 'さそり座', 'いて座', 'やぎ座', 'みずがめ座', 'うお座'
+  { name: 'おひつじ座', image: '/zodiac/aries.png' },
+  { name: 'おうし座', image: '/zodiac/taurus.png' },
+  { name: 'ふたご座', image: '/zodiac/gemini.png' },
+  { name: 'かに座', image: '/zodiac/cancer.png' },
+  { name: 'しし座', image: '/zodiac/leo.png' },
+  { name: 'おとめ座', image: '/zodiac/virgo.png' },
+  { name: 'てんびん座', image: '/zodiac/libra.png' },
+  { name: 'さそり座', image: '/zodiac/scorpio.png' },
+  { name: 'いて座', image: '/zodiac/sagittarius.png' },
+  { name: 'やぎ座', image: '/zodiac/capricorn.png' },
+  { name: 'みずがめ座', image: '/zodiac/aquarius.png' },
+  { name: 'うお座', image: '/zodiac/pisces.png' }
 ];
 
 const bloodTypes = ['A型', 'B型', 'O型', 'AB型'];
@@ -135,6 +145,7 @@ export default function Home() {
   } | null>(null);
   const [isShaking, setIsShaking] = useState(false);
   const [selectedZodiac, setSelectedZodiac] = useState('');
+  const [selectedZodiacImage, setSelectedZodiacImage] = useState('');
   const [selectedBloodType, setSelectedBloodType] = useState('');
 
   const drawFortune = () => {
@@ -179,14 +190,27 @@ export default function Home() {
                 <label className="block text-gray-700 mb-2">星座を選択</label>
                 <select
                   value={selectedZodiac}
-                  onChange={(e) => setSelectedZodiac(e.target.value)}
+                  onChange={(e) => {
+                    const zodiac = zodiacSigns.find(z => z.name === e.target.value);
+                    setSelectedZodiac(e.target.value);
+                    setSelectedZodiacImage(zodiac?.image || '');
+                  }}
                   className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black"
                 >
                   <option value="" className="text-black">選択してください</option>
                   {zodiacSigns.map((sign) => (
-                    <option key={sign} value={sign} className="text-black">{sign}</option>
+                    <option key={sign.name} value={sign.name} className="text-black">{sign.name}</option>
                   ))}
                 </select>
+                {selectedZodiacImage && (
+                  <div className="mt-2">
+                    <img
+                      src={selectedZodiacImage}
+                      alt={selectedZodiac}
+                      className="w-16 h-16 mx-auto object-contain"
+                    />
+                  </div>
+                )}
               </div>
               <div>
                 <label className="block text-gray-700 mb-2">血液型を選択</label>
@@ -215,10 +239,17 @@ export default function Home() {
               {fortune.level}
             </div>
             <div className="space-y-4 text-left">
-              <p className="text-gray-700">
-                <span className="font-semibold">星座：</span>
-                {fortune.zodiac}
-              </p>
+              <div className="flex items-center space-x-4">
+                <p className="text-gray-700">
+                  <span className="font-semibold">星座：</span>
+                  {fortune.zodiac}
+                </p>
+                <img
+                  src={zodiacSigns.find(z => z.name === fortune.zodiac)?.image}
+                  alt={fortune.zodiac}
+                  className="w-12 h-12 object-contain"
+                />
+              </div>
               <p className="text-gray-700">
                 <span className="font-semibold">血液型：</span>
                 {fortune.bloodType}
