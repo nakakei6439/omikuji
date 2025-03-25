@@ -9,11 +9,24 @@ const zodiacSigns = [
 
 const bloodTypes = ['A型', 'B型', 'O型', 'AB型'];
 
-const fortunes = [
+type Fortune = {
+  level: string;
+  color: string;
+  description?: string;
+  descriptions?: string[];
+};
+
+const fortunes: Fortune[] = [
   { 
     level: '大吉', 
     color: 'text-red-500', 
-    description: '今日は最高の運勢です！何をしても成功するでしょう。新しいことに挑戦するのに最適な日です。思い切った行動が良い結果を生むかもしれません。' 
+    descriptions: [
+      '今日は最高の運勢です！何をしても成功するでしょう。新しいことに挑戦するのに最適な日です。思い切った行動が良い結果を生むかもしれません。',
+      '大吉です！今日は特別な日になるでしょう。思いがけない幸運が訪れるかもしれません。積極的に行動すると、さらに良いことがあるでしょう。',
+      '最高の運勢です！今日はあなたの才能が開花する日かもしれません。周りの人々もあなたをサポートしてくれるでしょう。',
+      '大吉が訪れました！今日は新しい出会いやチャンスに恵まれるでしょう。直感を信じて行動すると良い結果が得られるかもしれません。',
+      '素晴らしい運勢です！今日はあなたの努力が報われる日になるでしょう。周りの人々もあなたの成功を喜んでくれるはずです。'
+    ]
   },
   { 
     level: '中吉', 
@@ -88,7 +101,10 @@ export default function Home() {
         zodiac: selectedZodiac,
         bloodType: selectedBloodType,
         luckyItem,
-        luckyColor
+        luckyColor,
+        description: fortune.level === '大吉' && fortune.descriptions
+          ? fortune.descriptions[Math.floor(Math.random() * fortune.descriptions.length)]
+          : fortune.description || ''
       });
       setIsShaking(false);
     }, 1000);
