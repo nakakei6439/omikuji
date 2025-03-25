@@ -10,11 +10,41 @@ const zodiacSigns = [
 const bloodTypes = ['A型', 'B型', 'O型', 'AB型'];
 
 const fortunes = [
-  { level: '大吉', color: 'text-red-500', description: '今日は最高の運勢です！何をしても成功するでしょう。' },
-  { level: '中吉', color: 'text-orange-500', description: '良い運勢です。積極的に行動すると良いことがあります。' },
-  { level: '小吉', color: 'text-yellow-500', description: 'まずまずの運勢です。慎重に行動しましょう。' },
-  { level: '吉', color: 'text-green-500', description: '安定した運勢です。普段通り過ごすのが良いでしょう。' },
-  { level: '末吉', color: 'text-blue-500', description: '少し注意が必要です。慎重に行動しましょう。' },
+  { 
+    level: '大吉', 
+    color: 'text-red-500', 
+    description: '今日は最高の運勢です！何をしても成功するでしょう。新しいことに挑戦するのに最適な日です。思い切った行動が良い結果を生むかもしれません。' 
+  },
+  { 
+    level: '中吉', 
+    color: 'text-orange-500', 
+    description: '良い運勢です。積極的に行動すると良いことがあります。周りの人との協力が吉と出るでしょう。' 
+  },
+  { 
+    level: '小吉', 
+    color: 'text-yellow-500', 
+    description: 'まずまずの運勢です。慎重に行動しましょう。小さな幸せを見つけられる日です。' 
+  },
+  { 
+    level: '吉', 
+    color: 'text-green-500', 
+    description: '安定した運勢です。普段通り過ごすのが良いでしょう。無理をせず、自分のペースで進めましょう。' 
+  },
+  { 
+    level: '末吉', 
+    color: 'text-blue-500', 
+    description: '少し注意が必要です。慎重に行動しましょう。周りの人の意見を聞くことで、良い方向に進めるかもしれません。' 
+  },
+  { 
+    level: '平', 
+    color: 'text-gray-500', 
+    description: '平穏な運勢です。特別な変化はありませんが、安定した日々を過ごせるでしょう。' 
+  },
+  { 
+    level: '凶', 
+    color: 'text-purple-500', 
+    description: '今日は慎重に過ごしましょう。大きな決断は避け、周りの人に相談しながら行動することをお勧めします。' 
+  }
 ];
 
 const luckyItems = [
