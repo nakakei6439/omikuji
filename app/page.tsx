@@ -145,7 +145,6 @@ export default function Home() {
   } | null>(null);
   const [isShaking, setIsShaking] = useState(false);
   const [selectedZodiac, setSelectedZodiac] = useState('');
-  const [selectedZodiacImage, setSelectedZodiacImage] = useState('');
   const [selectedBloodType, setSelectedBloodType] = useState('');
 
   const drawFortune = () => {
@@ -191,9 +190,7 @@ export default function Home() {
                 <select
                   value={selectedZodiac}
                   onChange={(e) => {
-                    const zodiac = zodiacSigns.find(z => z.name === e.target.value);
                     setSelectedZodiac(e.target.value);
-                    setSelectedZodiacImage(zodiac?.image || '');
                   }}
                   className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-black"
                 >
@@ -202,15 +199,6 @@ export default function Home() {
                     <option key={sign.name} value={sign.name} className="text-black">{sign.name}</option>
                   ))}
                 </select>
-                {selectedZodiacImage && (
-                  <div className="mt-2">
-                    <img
-                      src={selectedZodiacImage}
-                      alt={selectedZodiac}
-                      className="w-16 h-16 mx-auto object-contain"
-                    />
-                  </div>
-                )}
               </div>
               <div>
                 <label className="block text-gray-700 mb-2">血液型を選択</label>
@@ -238,22 +226,26 @@ export default function Home() {
             <div className={`text-5xl font-bold ${fortune.color} mb-4`}>
               {fortune.level}
             </div>
-            <div className="space-y-4 text-left">
-              <div className="flex items-center space-x-4">
-                <p className="text-gray-700">
-                  <span className="font-semibold">星座：</span>
-                  {fortune.zodiac}
-                </p>
-                <img
-                  src={zodiacSigns.find(z => z.name === fortune.zodiac)?.image}
-                  alt={fortune.zodiac}
-                  className="w-12 h-12 object-contain"
-                />
+            <div className="flex flex-col items-center mb-6">
+              <img
+                src={zodiacSigns.find(z => z.name === fortune.zodiac)?.image}
+                alt={fortune.zodiac}
+                className="w-32 h-32 object-contain mb-4"
+              />
+              <div className="flex items-center space-x-8">
+                <div className="text-center">
+                  <p className="text-2xl font-bold text-gray-800">
+                    {fortune.zodiac}
+                  </p>
+                </div>
+                <div className="text-center">
+                  <p className="text-2xl font-bold text-purple-600">
+                    {fortune.bloodType}
+                  </p>
+                </div>
               </div>
-              <p className="text-gray-700">
-                <span className="font-semibold">血液型：</span>
-                {fortune.bloodType}
-              </p>
+            </div>
+            <div className="space-y-4 text-left">
               <p className="text-gray-700">
                 <span className="font-semibold">ラッキーアイテム：</span>
                 {fortune.luckyItem}
