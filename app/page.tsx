@@ -68,7 +68,7 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-b from-purple-100 to-pink-100 flex flex-col items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
         <h1 className="text-3xl font-bold text-gray-800 mb-8">
-          星座と血液型で占う今日の運勢
+          今日の運勢
         </h1>
         
         {!fortune ? (
