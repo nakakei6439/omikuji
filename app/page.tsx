@@ -105,7 +105,7 @@ export default function Home() {
               onClick={drawFortune}
               className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105"
             >
-              おみくじを引く
+              占ってみる
             </button>
           </div>
         ) : (
