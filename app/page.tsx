@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { fortunes, getFortuneDescriptions } from './lib/fortunes';
+import { useState } from 'react';
+import { fortunes } from './lib/fortunes';
 
 const zodiacSigns = [
   { name: 'おひつじ座', image: '/zodiac/aries.png' },
@@ -66,19 +66,6 @@ export default function Home() {
   const [isShaking, setIsShaking] = useState(false);
   const [selectedZodiac, setSelectedZodiac] = useState('');
   const [selectedBloodType, setSelectedBloodType] = useState('');
-  const [fortuneDescriptions, setFortuneDescriptions] = useState<{ [key: string]: string[] }>({});
-
-  useEffect(() => {
-    // コンポーネントマウント時に運勢の説明文を取得
-    const fetchDescriptions = async () => {
-      const descriptions: { [key: string]: string[] } = {};
-      for (const fortune of fortunes) {
-        descriptions[fortune.level] = await getFortuneDescriptions(fortune.level);
-      }
-      setFortuneDescriptions(descriptions);
-    };
-    fetchDescriptions();
-  }, []);
 
   const drawFortune = () => {
     if (!selectedZodiac || !selectedBloodType) {
@@ -92,11 +79,12 @@ export default function Home() {
       const fortune = fortunes[randomIndex];
       const luckyItem = luckyItems[Math.floor(Math.random() * luckyItems.length)];
       const luckyColor = luckyColors[Math.floor(Math.random() * luckyColors.length)];
-      const descriptions = fortuneDescriptions[fortune.level] || [];
+      const descriptions = fortune.descriptions;
       const randomDescription = descriptions[Math.floor(Math.random() * descriptions.length)] || '';
 
       setFortune({
-        ...fortune,
+        level: fortune.level,
+        color: fortune.color,
         zodiac: selectedZodiac,
         bloodType: selectedBloodType,
         luckyItem,
